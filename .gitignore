@@ -45,4 +45,4 @@ app.*.map.json
 /android/app/release
 
 # Don't include the full characters sample json in the repo. Fetch it with the tool
-full_characters.json
+assets/full_characters.json

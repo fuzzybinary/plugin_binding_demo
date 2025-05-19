@@ -12,7 +12,7 @@ void main() async {
   final stopwatch = Stopwatch();
 
   final charactersJsonString = await rootBundle.loadString(
-    'full_characters.json',
+    'assets/full_characters.json',
   );
 
   stopwatch.start();
