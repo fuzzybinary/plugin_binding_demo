@@ -39,6 +39,10 @@ android {
     }
 }
 
+dependencies {
+    implementation("org.opencv:opencv:4.11.0")
+}
+
 flutter {
     source = "../.."
 }

@@ -13,10 +13,26 @@ import UIKit
         channel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) in
             if call.method == "methodCallChannelTest" {
                 result("OK")
+            } else if call.method == "detectQrCodes"{
+                if let arguments = call.arguments as? Dictionary<String, Any?>,
+                   let mat = arguments["mat"] as? Dictionary<String, Any?>,
+                   let width = mat["width"] as? Int32,
+                   let height = mat["height"] as? Int32,
+                   let data = mat["data"] as? FlutterStandardTypedData {
+                    let detectResult = OpenCVWrapper.detectMarkers(width, height, data)
+                    result(detectResult)
+                } else {
+                    result([
+                        "markerIds": [],
+                        "markerCorners": [:]
+                    ])
+                }
+            } else {
+                result(FlutterMethodNotImplemented)
             }
-            result(FlutterMethodNotImplemented)
         }
 
+        OpenCVWrapper.setDebugLogging()
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }

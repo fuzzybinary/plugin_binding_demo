@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../common/performance_table.dart';
 import '../global_data.dart';
 import '../metric.dart';
 
@@ -54,10 +55,6 @@ class _MethodChannelsScreenState extends State<MethodChannelsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final tableHeaderStyle = theme.textTheme.labelLarge!.copyWith(
-      fontWeight: FontWeight.bold,
-    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -72,33 +69,7 @@ class _MethodChannelsScreenState extends State<MethodChannelsScreen> {
           spacing: 20,
           children: [
             Text('Iterations: $_iterations'),
-            Table(
-              children: [
-                TableRow(
-                  decoration: BoxDecoration(color: Colors.blueGrey.shade200),
-                  children: [
-                    Container(),
-                    Text(
-                      'Min',
-                      style: tableHeaderStyle,
-                      textAlign: TextAlign.right,
-                    ),
-                    Text(
-                      'Max',
-                      style: tableHeaderStyle,
-                      textAlign: TextAlign.right,
-                    ),
-                    Text(
-                      'Avg',
-                      style: tableHeaderStyle,
-                      textAlign: TextAlign.right,
-                    ),
-                  ],
-                ),
-                metricRow(callMetric),
-                metricRow(fullResponse),
-              ],
-            ),
+            PerformanceTable(metrics: [callMetric, fullResponse]),
             ElevatedButton(
               onPressed: _runningTest ? null : _runTest,
               child: Text('Run Experiment'),

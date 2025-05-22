@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'c_ffi/c_ffi_screen.dart';
 import 'home_screen.dart';
 import 'method_channels/method_channels_screen.dart';
+import 'method_channels/open_cv_method_channels_screen.dart';
 
 class BindingDemoApp extends StatelessWidget {
   BindingDemoApp({super.key});
@@ -14,6 +15,10 @@ class BindingDemoApp extends StatelessWidget {
       GoRoute(
         path: '/method_channels',
         builder: (context, state) => MethodChannelsScreen(),
+      ),
+      GoRoute(
+        path: '/open_cv_method_channels',
+        builder: (context, state) => OpenCvMethodChannelsScreen(),
       ),
       GoRoute(path: '/c_ffi', builder: (context, state) => CFfiScreen()),
     ],

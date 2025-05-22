@@ -34,6 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   text: 'Method Channles',
                   onTapped: () => context.push('/method_channels'),
                 ),
+                NavRow(
+                  text: 'OpenCV - Method Channels',
+                  onTapped: () => context.push('/open_cv_method_channels'),
+                ),
                 NavRow(text: 'C FFI', onTapped: () => context.push('/c_ffi')),
               ],
             ),
