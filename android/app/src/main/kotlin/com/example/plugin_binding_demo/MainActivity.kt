@@ -8,13 +8,9 @@ import io.flutter.plugin.common.MethodChannel
 import org.opencv.android.OpenCVLoader
 import org.opencv.core.CvType
 import org.opencv.core.Mat
-import org.opencv.core.MatOfPoint
-import org.opencv.core.Point
-import org.opencv.objdetect.Dictionary as CVDictionary
 import org.opencv.objdetect.ArucoDetector
 import org.opencv.objdetect.DetectorParameters
 import org.opencv.objdetect.Objdetect
-import org.opencv.utils.Converters
 import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime

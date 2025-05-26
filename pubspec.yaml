@@ -12,15 +12,28 @@ dependencies:
   cupertino_icons: ^1.0.8
   go_router: ^15.1.1
   jni: ^0.14.2
+  ffi: ^2.1.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
   jnigen: ^0.14.2
+  ffigen: ^19.0.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/full_characters.json
     - assets/singlemarkersoriginal.jpg
+
+ffigen:
+  name: 'OpenCv'
+  functions:
+    leaf:
+      include:
+        - '.*'
+  output: lib/open_cv_c.dart
+  headers:
+    entry-points:
+      - 'c_module/opencv_wrapper.h'

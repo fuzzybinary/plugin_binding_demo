@@ -37,10 +37,16 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    externalNativeBuild {
+        cmake {
+            path = file("CMakeLists.txt")
+        }
+    }
 }
 
 dependencies {
-    implementation("org.opencv:opencv:4.11.0")
+    implementation(project(":sdk"))
 }
 
 flutter {
