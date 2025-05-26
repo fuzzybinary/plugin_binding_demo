@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,6 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTapped: () => context.push('/open_cv_method_channels'),
                 ),
                 NavRow(text: 'C FFI', onTapped: () => context.push('/c_ffi')),
+                if (Platform.isAndroid)
+                  NavRow(
+                    text: 'jnigen FFI',
+                    onTapped: () => context.push('/jnigen_ffi'),
+                  ),
               ],
             ),
           ),

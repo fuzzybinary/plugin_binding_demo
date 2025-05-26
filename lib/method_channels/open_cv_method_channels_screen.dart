@@ -1,9 +1,9 @@
-import 'dart:typed_data';
-import 'dart:ui';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../common/marker_painter.dart';
 import '../common/performance_table.dart';
 import '../metric.dart';
 
@@ -28,15 +28,37 @@ class _OpenCvMethodChannelsScreenState
   final Metric classifyTime = Metric('Classify Time');
   final Metric fullResponse = Metric('Full Time');
 
-  List<int> _markerIds = Int32List(0);
+  ui.Image? _imageAsset;
+  ByteData? _byteData;
+  List<int> _markerIds = [];
   List<List<List<double>>> _markerCorners = [];
 
   String status = '';
 
+  @override
+  void initState() {
+    super.initState();
+
+    _getImageByteData();
+  }
+
+  void _getImageByteData() async {
+    final rawImageData = await rootBundle.load(imageLocation);
+    _imageAsset = await decodeImageFromList(rawImageData.buffer.asUint8List());
+    _byteData = await _imageAsset!.toByteData(
+      format: ui.ImageByteFormat.rawStraightRgba,
+    );
+  }
+
+  void _resetMetrics() {
+    callMetric.reset();
+    classifyTime.reset();
+    fullResponse.reset();
+  }
+
   void _runTestMulti() async {
     setState(() {
-      callMetric.reset();
-      fullResponse.reset();
+      _resetMetrics();
       _runningTest = true;
       _iterations = 0;
     });
@@ -54,8 +76,7 @@ class _OpenCvMethodChannelsScreenState
 
   void _runTestOnce() async {
     setState(() {
-      callMetric.reset();
-      fullResponse.reset();
+      _resetMetrics();
       _runningTest = true;
       _iterations = 0;
     });
@@ -67,14 +88,7 @@ class _OpenCvMethodChannelsScreenState
   }
 
   Future<void> _runTest() async {
-    final rawImageData = await rootBundle.load(imageLocation);
-    final imageAsset = await decodeImageFromList(
-      rawImageData.buffer.asUint8List(),
-    );
-    final byteData = await imageAsset.toByteData(
-      format: ImageByteFormat.rawStraightRgba,
-    );
-    if (byteData == null) {
+    if (_byteData == null) {
       setState(() {
         status = 'Failed to get byte data from image :(';
       });
@@ -85,9 +99,9 @@ class _OpenCvMethodChannelsScreenState
     stopwatch.start();
     final future = methodChannel.invokeMapMethod('detectQrCodes', {
       'mat': {
-        'width': imageAsset.width,
-        'height': imageAsset.height,
-        'data': byteData.buffer.asUint8List(),
+        'width': _imageAsset!.width,
+        'height': _imageAsset!.height,
+        'data': _byteData!.buffer.asUint8List(),
       },
     });
     callMetric.addSample(stopwatch.elapsedMicroseconds / 1000);
@@ -155,34 +169,4 @@ class _OpenCvMethodChannelsScreenState
       ),
     );
   }
-}
-
-class MarkerPainter extends CustomPainter {
-  final List<int> markerIds;
-  List<List<List<double>>> markerCorners = [];
-
-  MarkerPainter(this.markerIds, this.markerCorners);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final scaleFactor = size.width / 640.0;
-    final linePaint =
-        Paint()
-          ..color = Colors.green
-          ..strokeWidth = 2.0;
-    for (final marker in markerCorners) {
-      for (int i = 0; i < 4; ++i) {
-        final a = marker[i];
-        final b = marker[(i + 1) % 4];
-        canvas.drawLine(
-          Offset(a[0], a[1]) * scaleFactor,
-          Offset(b[0], b[1]) * scaleFactor,
-          linePaint,
-        );
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'c_ffi/c_ffi_screen.dart';
+import 'ffi/c_ffi_screen.dart';
+import 'ffi/jni_gen_ffi_screen.dart';
 import 'home_screen.dart';
 import 'method_channels/method_channels_screen.dart';
 import 'method_channels/open_cv_method_channels_screen.dart';
@@ -21,6 +22,10 @@ class BindingDemoApp extends StatelessWidget {
         builder: (context, state) => OpenCvMethodChannelsScreen(),
       ),
       GoRoute(path: '/c_ffi', builder: (context, state) => CFfiScreen()),
+      GoRoute(
+        path: '/jnigen_ffi',
+        builder: (context, state) => JniGenFfiScreen(),
+      ),
     ],
   );
 

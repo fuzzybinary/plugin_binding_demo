@@ -1,0 +1,18 @@
+android_sdk_config:
+  add_gradle_deps: true
+
+output:
+  dart:
+    path: lib/open_cv_jni.dart
+    structure: single_file
+
+source_path:
+  - 'android/app'
+classes:
+  - 'org.opencv.core.CvType'
+  - 'org.opencv.core.Mat'
+  - 'org.opencv.core.Point'
+  - 'org.opencv.objdetect.Dictionary'
+  - 'org.opencv.objdetect.ArucoDetector'
+  - 'org.opencv.objdetect.DetectorParameters'
+  - 'org.opencv.objdetect.Objdetect'
