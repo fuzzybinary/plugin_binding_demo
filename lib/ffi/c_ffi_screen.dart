@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:ffi/ffi.dart';
@@ -40,8 +41,13 @@ class _CFfiScreenState extends State<CFfiScreen> {
   void initState() {
     super.initState();
 
-    final dylib = DynamicLibrary.open('libopencv_wrapper.so');
-    opencv = OpenCv(dylib);
+    if (Platform.isAndroid) {
+      final dylib = DynamicLibrary.open('libopencv_wrapper.so');
+      opencv = OpenCv(dylib);
+    } else {
+      final dylib = DynamicLibrary.executable();
+      opencv = OpenCv(dylib);
+    }
     opencv.initializeOpenCV();
     _getImageByteData();
   }

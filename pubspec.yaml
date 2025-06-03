@@ -26,14 +26,3 @@ flutter:
   assets:
     - assets/full_characters.json
     - assets/singlemarkersoriginal.jpg
-
-ffigen:
-  name: 'OpenCv'
-  functions:
-    leaf:
-      include:
-        - '.*'
-  output: lib/open_cv_c.dart
-  headers:
-    entry-points:
-      - 'c_module/opencv_wrapper.h'
