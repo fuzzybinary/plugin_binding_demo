@@ -5,4 +5,5 @@ flutter build apk
 
 dart run ffigen opencv_ffigen.yaml
 dart run jnigen opencv_jnigen.yaml
-dart run ffigen audio_ffigen.yaml
+
+dart run ffigen ble_ffigen.yaml

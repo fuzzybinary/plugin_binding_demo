@@ -41,11 +41,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTapped: () => context.push('/open_cv_method_channels'),
                 ),
                 NavRow(text: 'C FFI', onTapped: () => context.push('/c_ffi')),
-                if (Platform.isAndroid)
+                if (Platform.isAndroid) ...[
                   NavRow(
-                    text: 'jnigen FFI',
+                    text: 'OpenCV JNI',
                     onTapped: () => context.push('/jnigen_ffi'),
                   ),
+                  NavRow(
+                    text: 'Bluetooth JNI',
+                    onTapped: () => context.push('/jnigen_audio'),
+                  ),
+                ],
               ],
             ),
           ),

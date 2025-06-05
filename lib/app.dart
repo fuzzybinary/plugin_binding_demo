@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'ffi/c_ffi_screen.dart';
+import 'ffi/jni_gen_ble.dart';
 import 'ffi/jni_gen_ffi_screen.dart';
 import 'home_screen.dart';
 import 'method_channels/method_channels_screen.dart';
@@ -26,6 +27,7 @@ class BindingDemoApp extends StatelessWidget {
         path: '/jnigen_ffi',
         builder: (context, state) => JniGenFfiScreen(),
       ),
+      GoRoute(path: '/jnigen_audio', builder: (context, state) => JniGenBle()),
     ],
   );
 

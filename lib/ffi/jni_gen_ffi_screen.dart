@@ -164,7 +164,7 @@ class _JniGenFfiScreenState extends State<JniGenFfiScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Method Channels'),
+        title: Text('jnigen Open CV'),
       ),
       body: Container(
         alignment: Alignment.center,

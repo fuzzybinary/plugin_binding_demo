@@ -153,7 +153,7 @@ class _CFfiScreenState extends State<CFfiScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Method Channels'),
+        title: Text('C FFI'),
       ),
       body: Container(
         alignment: Alignment.center,

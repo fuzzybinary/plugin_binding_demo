@@ -1,0 +1,30 @@
+android_sdk_config:
+  add_gradle_deps: true
+
+output:
+  dart:
+    path: lib/ble_jni.dart
+    structure: single_file
+
+source_path:
+  - 'android/app'
+classes:
+  - 'android.bluetooth.BluetoothManager'
+  - 'android.bluetooth.BluetoothAdapter'
+  - 'android.bluetooth.BluetoothDevice'
+  - 'android.bluetooth.BluetoothGatt'
+  - 'android.bluetooth.BluetoothGattService'
+  - 'android.bluetooth.BluetoothGattDescriptor'
+  - 'android.bluetooth.BluetoothGattCharacteristic'
+  - 'android.bluetooth.BluetoothProfile'
+  - 'android.bluetooth.le.BluetoothLeScanner'
+  - 'android.bluetooth.le.ScanFilter'
+  - 'android.bluetooth.le.ScanResult'
+  - 'android.bluetooth.le.ScanSettings'
+  - 'android.bluetooth.le.ScanCallback'
+  - 'android.content.Context'
+  - 'java.util.UUID'
+  - 'androidx.core.app.ActivityCompat'
+  - 'android.Manifest'
+  - 'com.example.plugin_binding_demo.BluetoothGattCallbackProxy'
+  
