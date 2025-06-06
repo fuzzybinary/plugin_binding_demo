@@ -18,6 +18,8 @@ typedef struct {
   Marker* markers;
 } DecodeResult;
 
+void linkerPleaseInclude(bool callFunctions);
+
 void initializeOpenCV();
 
 void freeDecodeResult(DecodeResult* result);

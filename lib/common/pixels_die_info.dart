@@ -54,4 +54,16 @@ class RollStateMessage {
       faceIndex: faceIndex,
     );
   }
+
+  factory RollStateMessage.fromByteList(List<int> bytes) {
+    int id = bytes.elementAt(0);
+    assert(id == PixelMessages.rollState.index);
+    int rollState = bytes.elementAt(1);
+    int faceIndex = bytes.elementAt(2);
+
+    return RollStateMessage._(
+      rollState: PixelRollState.values[rollState],
+      faceIndex: faceIndex,
+    );
+  }
 }

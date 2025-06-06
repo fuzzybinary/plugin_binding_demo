@@ -8,16 +8,27 @@
 extern "C" {
 #endif
 
+#define EXPORT __attribute__((retain)) __attribute__((visibility("default")))
+
 static cv::aruco::Dictionary dictionary;
 static cv::aruco::ArucoDetector detector;
 
+void linkerPleaseInclude(bool callFunctions) {
+//    if (callFunctions) {
+//        initializeOpenCV();
+//        DecodeResult* value = decodeMarkers(NULL, 0, 0);
+//        freeDecodeResult(value);
+//    }
+}
+
+__attribute__((retain)) __attribute__((visibility("default")))
 void initializeOpenCV() {
     cv::aruco::DetectorParameters detectorParams = cv::aruco::DetectorParameters();
     dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_6X6_250);
     detector = cv::aruco::ArucoDetector(dictionary, detectorParams);
 }
 
-DecodeResult* decodeMarkers(const unsigned char *imageData, int width, int height) {
+EXPORT DecodeResult* decodeMarkers(const unsigned char *imageData, int width, int height) {
     cv::Mat image(height, width, CV_8UC4, (void*)imageData);
 
     std::vector<std::vector<cv::Point2f>> markerCorners;
@@ -40,7 +51,7 @@ DecodeResult* decodeMarkers(const unsigned char *imageData, int width, int heigh
     return result;
 }
 
-void freeDecodeResult(DecodeResult* result) {
+EXPORT  void freeDecodeResult(DecodeResult* result) {
     if (result) {
         delete[] result->markers;
         delete result;

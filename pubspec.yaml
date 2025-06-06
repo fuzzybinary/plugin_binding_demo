@@ -13,6 +13,7 @@ dependencies:
   go_router: ^15.1.1
   jni: ^0.14.2
   ffi: ^2.1.4
+  objective_c: ^8.0.0
 
 dev_dependencies:
   flutter_test:

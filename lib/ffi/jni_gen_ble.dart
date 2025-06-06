@@ -236,25 +236,23 @@ class _JniGenBleState extends State<JniGenBle> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return using((arena) {
-      return Scaffold(
-        appBar: AppBar(title: Text('Bluetooth JNI')),
-        body: Center(
-          child: Column(
-            children: [
-              Text(
-                currentConnectionStatus,
-                style: theme.textTheme.headlineMedium,
-              ),
-              if (lastRollingStatus != null) ...[
-                Divider(),
-                Text(lastRollingStatus!, style: theme.textTheme.headlineMedium),
-              ],
+    return Scaffold(
+      appBar: AppBar(title: Text('Bluetooth JNI')),
+      body: Center(
+        child: Column(
+          children: [
+            Text(
+              currentConnectionStatus,
+              style: theme.textTheme.headlineMedium,
+            ),
+            if (lastRollingStatus != null) ...[
+              Divider(),
+              Text(lastRollingStatus!, style: theme.textTheme.headlineMedium),
             ],
-          ),
+          ],
         ),
-      );
-    });
+      ),
+    );
   }
 }
 

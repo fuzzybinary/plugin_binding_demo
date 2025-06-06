@@ -1,0 +1,23 @@
+name: CoreBluetooth
+description: Bindings for iOS CoreBluetooth
+language: objc
+output: 
+  bindings: 'lib/core_bluetooth.dart'
+  objc-bindings: 'ios/core_bluetooth.dart.m'
+headers:
+  entry-points:
+    - '/Applications/Xcode-16.2.0.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.2.sdk/System/Library/Frameworks/CoreBluetooth.framework/Headers/CoreBluetooth.h'
+exclude-all-by-default: true
+objc-interfaces:
+  include:
+    - CBCentralManager
+    - CBPeripheral
+    - CBService
+    - CBUUID
+    - CBCharacteristic
+    - CBDescriptor
+    - CBPeripheralManager
+objc-protocols:
+  include:
+    - CBCentralManagerDelegate
+    - CBPeripheralDelegate
